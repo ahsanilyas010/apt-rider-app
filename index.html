@@ -264,7 +264,7 @@ body{font-family:var(--fb);background:var(--g0);color:var(--white);min-height:10
       </div>
       <div class="mrow" style="margin-top:10px">
         <div class="mlbl">API Endpoint</div>
-        <input class="inp" id="apiUrlInput" placeholder="https://script.google.com/macros/s/.../exec" style="margin-top:6px;font-size:11px" oninput="saveRiderConfig()">
+        <input class="inp" id="apiUrlInput" placeholder="https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnRJPMDjHe6iJvf1EJiPx5jzFmbLCl1sJyhqmgzCFC9HoHB7pNKJOq1yynaTffqZd5CkVVvvxlYvZtOLeeAqUh3TVdm7Cis0FEA2Xsdhp29edVLkRQ1Ij1YIzqRUzexXIKSjK1mg3qSz-YVbA8fHA-Gs-5CKxJ7JJsoOO_1z4zyHprZWyuZgjFhRo4821AgUi7cy4pwzaiqUuh1XDTR98pet0VZ-A39kpz25QdbO2zbGZlyjYq4&lib=Mlvip-4fjv9J6MmSxJqJnfl6OBbJsPqgc" style="margin-top:6px;font-size:11px" oninput="saveRiderConfig()">
       </div>
       <div class="mrow" style="margin-top:10px">
         <div class="mlbl">API Key</div>
@@ -433,7 +433,7 @@ function clearLocal() {
 async function syncAll() {
   if(STATE.syncing) return;
   if(!STATE.online) { showToast("Offline — using cached data","err"); return; }
-  if(!CFG.GAS_URL) { showToast("https://script.google.com/macros/s/AKfycbyHHNRfheiNAJYzdprb4jFOKen1ta5L2pyZRUDVGQUr/dev","err"); return; }
+  if(!CFG.GAS_URL) { showToast("https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnRJPMDjHe6iJvf1EJiPx5jzFmbLCl1sJyhqmgzCFC9HoHB7pNKJOq1yynaTffqZd5CkVVvvxlYvZtOLeeAqUh3TVdm7Cis0FEA2Xsdhp29edVLkRQ1Ij1YIzqRUzexXIKSjK1mg3qSz-YVbA8fHA-Gs-5CKxJ7JJsoOO_1z4zyHprZWyuZgjFhRo4821AgUi7cy4pwzaiqUuh1XDTR98pet0VZ-A39kpz25QdbO2zbGZlyjYq4&lib=Mlvip-4fjv9J6MmSxJqJnfl6OBbJsPqgc", "err"); return; }
 
   STATE.syncing=true;
   var btn=document.getElementById("syncBtn");
