@@ -146,6 +146,12 @@ body{font-family:var(--fb);background:var(--g0);color:var(--white);min-height:10
 .toast{position:fixed;top:68px;left:50%;transform:translateX(-50%);background:var(--g2);color:var(--white);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.4);display:none;white-space:nowrap;font-family:var(--fb)}
 .toast.err{background:var(--red)}
 .toast.on{display:block;animation:fadeIn .2s ease}
+/* Auth PIN dot */
+.pdot{width:8px;height:8px;background:var(--border);border-radius:50%;margin:0 3px;display:inline-block}
+.pdot.on{background:var(--acc)}
+/* PIN keypad button */
+.pkb{background:var(--card);border:1px solid var(--border);color:var(--white);padding:8px 0;font-size:14px;font-family:var(--fb);border-radius:8px;cursor:pointer;transition:background .2s}
+.pkb:active{background:var(--g2)}
 
 /* ── MODAL ── */
 .moverlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:flex-end;justify-content:center}
