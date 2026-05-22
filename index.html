@@ -319,7 +319,11 @@ body{font-family:var(--fb);background:var(--g0);color:var(--white);min-height:10
 //  CONFIG — reads from localStorage
 // ══════════════════════════════════════════════════════
 var CFG = {
-  get GAS_URL() { return localStorage.getItem("apt_gas_url")||""; },
+  get GAS_URL() {
+    // Return configured URL or use built‑in default fallback
+    return localStorage.getItem("apt_gas_url")
+      || "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnRJPMDjHe6iJvf1EJiPx5jzFmbLCl1sJyhqmgzCFC9HoHB7pNKJOq1yynaTffqZd5CkVVvvxlYvZtOLeeAqUh3TVdm7Cis0FEA2Xsdhp29edVLkRQ1Ij1YIzqRUzexXIKSjK1mg3qSz-YVbA8fHA-Gs-5CKxJ7JJsoOO_1z4zyHprZWyuZgjFhRo4821AgUi7cy4pwzaiqUuh1XDTR98pet0VZ-A39kpz25QdbO2zbGZlyjYq4&lib=Mlvip-4fjv9J6MmSxJqJnfl6OBbJsPqgc";
+  },
   get API_KEY() { return localStorage.getItem("apt_api_key")||"APT_SECRET_2025"; },
   get RIDER_ID(){ return localStorage.getItem("apt_rider_id")||"R-001"; },
   get RIDER_NM(){ return localStorage.getItem("apt_rider_name")||"Rider"; },
