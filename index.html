@@ -333,7 +333,7 @@ body{font-family:var(--fb);background:var(--g0);color:var(--white);min-height:10
 //  Default URL = the /exec URL from Script 1 (AKfycbyem...)
 //  Rider sets their own in Profile tab and it saves to localStorage.
 // ═══════════════════════════════════════════════════════
-var DEFAULT_GAS_URL = "https://script.google.com/macros/s/AKfycbyAQBG1z313mwGIhlrrs5fAGp4098AVYWre1lp2-CgNETbk2GPDxCH9LEPhZrk-cA6Cpw/exec";
+var DEFAULT_GAS_URL = "https://script.google.com/macros/s/AKfycbxe9vONh9_JDh3teq1Gf9SABiXYtaPXuBY74TVRrDARxGZT3ycf38g50Lya9BB7ZaTPyw/exec";
 var DEFAULT_API_KEY = "APT_SECRET_2025";
 
 var CFG = {
@@ -761,22 +761,23 @@ async function syncOrderToSheet(order) {
     var invId = "INV-R-" + Date.now().toString().slice(-6);
     order.invId = invId;
 
-    var json = await safeFetch(CFG.GAS_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "rider_order",
-        key: CFG.API_KEY,
-        riderId: CFG.RIDER_ID,
-        data: {
-          custId: order.custId, custName: order.custName,
-          date: order.date, payTerms: "COD",
-          notes: "[Rider: " + CFG.RIDER_NM + "] " + (order.notes || ""),
-          items: order.items,
-          createdBy: CFG.RIDER_NM + " (" + CFG.RIDER_ID + ")"
-        }
-      })
-    });
+    // Use GET request to avoid CORS issues with Google Apps Script
+    var orderPayload = {
+      custId:   order.custId,
+      custName: order.custName,
+      date:     order.date,
+      payTerms: "COD",
+      notes:    "[Rider: " + CFG.RIDER_NM + "] " + (order.notes || ""),
+      items:    order.items
+    };
+
+    var url = CFG.GAS_URL +
+      "?action=rider_order" +
+      "&key="     + encodeURIComponent(CFG.API_KEY) +
+      "&riderId=" + encodeURIComponent(CFG.RIDER_ID) +
+      "&order="   + encodeURIComponent(JSON.stringify(orderPayload));
+
+    var json = await safeFetch(url);
 
     order.synced  = true;
     order.sheetId = json.data && json.data.id;
